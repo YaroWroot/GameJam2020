@@ -10,14 +10,17 @@ public class PlayerController : MonoBehaviour
     public GameObject _playerAsset;
     public CharacterController _characterController;
     public Collider _intersectCheck;
+    public Animator _animator;
 
     private GameObject _interactableMovingTo = null;
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
+    private bool _inMoveTrigger = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        _animator = GetComponentInChildren<Animator>();
+        _animator.enabled = true;
     }
 
     // Update is called once per frame
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
+                    MoveLocSpriteSpawn();
                 }
             }
         }
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
         {
             _interactableMovingTo = null;
             LocateHit();
+            _animator.SetBool("Movement", true);
         }
  
         MoveCharacter();
@@ -106,15 +111,20 @@ public class PlayerController : MonoBehaviour
             {
                 _moveToPoint = hit.point;
             }
-            
-            if(_movePointLocation == null)
-            {
-                _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
-            }
-            else
-            {
-                _movePointLocation.position = _moveToPoint;
-            }
+
+            MoveLocSpriteSpawn();
+        }
+    }
+
+    private void MoveLocSpriteSpawn()
+    {
+        if (_movePointLocation == null)
+        {
+            _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
+        }
+        else
+        {
+            _movePointLocation.position = _moveToPoint;
         }
     }
 
@@ -130,7 +140,17 @@ public class PlayerController : MonoBehaviour
                                                   Time.deltaTime * 10);
 
             _characterController.SimpleMove(transform.forward * _speed);
+            /*if(!_inMoveTrigger)*/
+            
+            //_inMoveTrigger = true;
         }
+        else
+        {
+            /*if (_inMoveTrigger)*/ _animator.SetBool("Movement", false);
+            //_inMoveTrigger = false;
+        }
+
+        //Debug.Log("_inMoveTrigger: " + _inMoveTrigger);
     }
 
     private void DeleteMovePointLocation()
