@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class Loot : MonoBehaviour, IInteractable
+public class Loot : BetterMonoBehaviour, IInteractable
 {
 
-    [SerializeField]
-    private GameObject _holder;
+    public GameObject _holder;
     public Pickupable _loot;
     public bool _swappable;
     public float _despawnDelay;
@@ -16,19 +16,17 @@ public class Loot : MonoBehaviour, IInteractable
 
     public void Initialise(float delay, bool swappable)
     {
-        if (delay <= 0)
-        {
-            throw new IllegalArgumentException("Cannot initialise loot: the delay was zero or less.");
-        }
+        Assert.IsTrue(delay > 0);
         _despawnDelay = delay;
-        _despawnTimer = delay;
         _swappable = swappable;
+        ResetDespawnTimer();
     }
 
     void FixedUpdate()
     {
         if (_despawning)
         {
+            Destroy(gameObject);
             return;
         }
         if (_despawnTimer > 0)
@@ -39,13 +37,30 @@ public class Loot : MonoBehaviour, IInteractable
         _despawning = true;
     }
 
+    /// <summary>
+    /// Defer the decision of how the loot is handled to the loot itself.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     public bool Interact(PlayerController player)
     {
-        if (_loot == null)
+        Assert.IsNotNull(player);
+        if (_despawning)
         {
-            throw new FatalErrorException("Loot cannot handle player interaction: the loot has no loot.");
+            return false;
         }
-        return _loot.Interact(player);
+        return _loot.Interact(player, this);
+    }
+
+    public void Despawn()
+    {
+        _despawning = true;
+    }
+
+    public void ResetDespawnTimer()
+    {
+        _despawnTimer = _despawnDelay;
+        _despawning = false;
     }
 
 }

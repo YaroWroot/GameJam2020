@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BetterMonoBehaviour
 {
     public float _speed = 10.0f;
     public LayerMask _ignoreClickLayer;
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private float DistanceToTarget(Vector3 target)
     {
-        return Vector3.Distance((transform.position - new Vector3(0, transform.position.y, 0)), target);
+        return Vector3.Distance(getYNullifiedPosition(), target);
     }
 
     private GameObject LeftMouseHit()
