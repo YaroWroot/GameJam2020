@@ -9,7 +9,7 @@ public class Looter : MonoBehaviour
     private Loot _nearest;
     private Vector3 _lastPosition;
     private HashSet<Loot> _touching = new HashSet<Loot>();
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +30,7 @@ public class Looter : MonoBehaviour
         {
             return;
         }
+        _lastPosition = transform.position;
         Loot nearestLoot = null;
         float nearestDistance = float.MaxValue;
         foreach (Loot touching in _touching)
