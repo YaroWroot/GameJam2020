@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3559603929641368617}
   - component: {fileID: 3559603929641368618}
   - component: {fileID: 3559603929641368619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Asset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3559603931042267566}
   - component: {fileID: 3559603931042267567}
   - component: {fileID: 3559603931042267560}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,9 +198,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3559603931393692898}
   - component: {fileID: 427858594892174161}
+  - component: {fileID: 252954123406595558}
   - component: {fileID: 5712479245878204435}
-  m_Layer: 0
-  m_Name: Player 1
+  m_Layer: 10
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,6 +240,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &252954123406595558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559603931393692899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5712479245878204435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,5 +266,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _ignoreClickLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 1024
   _playerAsset: {fileID: 3559603929641368629}
   _characterController: {fileID: 427858594892174161}
+  _intersectCheck: {fileID: 252954123406595558}
