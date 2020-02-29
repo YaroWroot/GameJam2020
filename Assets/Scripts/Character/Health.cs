@@ -5,8 +5,20 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float _hp = 50.0f;
-    public float _maxHp = 50.0f;
+    public float _maxHp = 100.0f;
     public float _ap = 1.0f;
+
+    public bool Heal(float value)
+    {
+        if((_hp + value) > _maxHp)
+        {
+            _hp = _maxHp;
+            return true;
+        }
+
+        _hp += value;
+        return true;
+    }
 
     public bool TakeDamage(float damage)
     {
