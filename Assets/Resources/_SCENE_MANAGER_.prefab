@@ -43,4 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6714203c668e57f4f91326fd0023734c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovePointIndicator: {fileID: 0}
+  MovePointIndicator: {fileID: 5136277357409175919, guid: e503fa05b7126fb42a7287bf2d3707d3,
+    type: 3}
