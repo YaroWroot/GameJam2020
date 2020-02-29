@@ -10,13 +10,17 @@ public class PlayerController : MonoBehaviour
     public GameObject _playerAsset;
     public CharacterController _characterController;
     public Collider _intersectCheck;
+    public Animator _animator;
 
+    private GameObject _interactableMovingTo = null;
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
+    private bool _inMoveTrigger = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        _animator = GetComponentInChildren<Animator>();
+        _animator.enabled = true;
     }
 
     // Update is called once per frame
@@ -35,20 +39,40 @@ public class PlayerController : MonoBehaviour
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
                     target.GetComponent<IInteractable>().Interact(this);
+
+                    if (_interactableMovingTo != null) _interactableMovingTo = null;
                 }
                 else
                 {
+                    _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
+                    MoveLocSpriteSpawn();
                 }
             }
         }
         if(Input.GetMouseButton(1))
         {
+            _interactableMovingTo = null;
             LocateHit();
         }
  
         MoveCharacter();
+        CheckIfStoredInteractIsInRange();
         DeleteMovePointLocation();
+    }
+
+    private void CheckIfStoredInteractIsInRange()
+    {
+        if (_interactableMovingTo == null) return;
+
+        if (_intersectCheck.bounds.Intersects(_interactableMovingTo.transform.GetComponent<Collider>().bounds))
+        {
+            _interactableMovingTo.GetComponent<IInteractable>().Interact(this);
+
+            if (_interactableMovingTo != null) _interactableMovingTo = null;
+
+
+        }
     }
 
     private float DistanceToTarget(Vector3 target)
@@ -88,15 +112,20 @@ public class PlayerController : MonoBehaviour
             {
                 _moveToPoint = hit.point;
             }
-            
-            if(_movePointLocation == null)
-            {
-                _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
-            }
-            else
-            {
-                _movePointLocation.position = _moveToPoint;
-            }
+
+            MoveLocSpriteSpawn();
+        }
+    }
+
+    private void MoveLocSpriteSpawn()
+    {
+        if (_movePointLocation == null)
+        {
+            _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
+        }
+        else
+        {
+            _movePointLocation.position = _moveToPoint;
         }
     }
 
@@ -112,7 +141,14 @@ public class PlayerController : MonoBehaviour
                                                   Time.deltaTime * 10);
 
             _characterController.SimpleMove(transform.forward * _speed);
+            _animator.SetBool("Movement", true);
         }
+        else
+        {
+            _animator.SetBool("Movement", false);
+        }
+
+        //Debug.Log("_inMoveTrigger: " + _inMoveTrigger);
     }
 
     private void DeleteMovePointLocation()
