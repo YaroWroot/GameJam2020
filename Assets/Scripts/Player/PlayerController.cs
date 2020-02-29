@@ -133,7 +133,6 @@ public class PlayerController : MonoBehaviour
     {
         if(DistanceToTarget(_moveToPoint) > 0.5f)
         {
-            //Debug.Log("Distance to _moveToPoint " + DistanceToTarget(_moveToPoint));
             Quaternion lookAtRot = Quaternion.LookRotation(_moveToPoint - transform.position, Vector3.up);
 
             transform.rotation = Quaternion.Slerp(transform.rotation,
@@ -147,8 +146,6 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("Movement", false);
         }
-
-        //Debug.Log("_inMoveTrigger: " + _inMoveTrigger);
     }
 
     private void DeleteMovePointLocation()

@@ -5,22 +5,15 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     public Animator _animator;
-    public CharacterController _characterController;
 
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
+    public void Death()
     {
-        //if (_characterController.velocity.magnitude > 0)
-        //{
-        //    _animator.SetBool("Movement", true);
-        //}
-        //else
-        //{
-        //    _animator.SetBool("Movement", false);
-        //}
+        _animator.SetTrigger("Death");
     }
+
 }
