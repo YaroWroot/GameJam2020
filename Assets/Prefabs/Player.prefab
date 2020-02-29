@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 427858594892174161}
   - component: {fileID: 252954123406595558}
   - component: {fileID: 5712479245878204435}
+  - component: {fileID: 5012367442442559469}
   - component: {fileID: 5159496993385671898}
   m_Layer: 10
   m_Name: Player
@@ -89,6 +90,20 @@ MonoBehaviour:
   _characterController: {fileID: 427858594892174161}
   _intersectCheck: {fileID: 252954123406595558}
   _animator: {fileID: 0}
+--- !u!114 &5012367442442559469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559603931393692899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f3be01c6287d743aabf55c5584ee23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  _characterController: {fileID: 0}
 --- !u!114 &5159496993385671898
 MonoBehaviour:
   m_ObjectHideFlags: 0

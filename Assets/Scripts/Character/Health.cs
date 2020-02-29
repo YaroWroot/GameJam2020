@@ -24,6 +24,12 @@ public class Health : MonoBehaviour
     {
         _hp -= ArmourReduction(damage);
 
+        if(_hp <= 0)
+        {
+            GetComponent<CharacterAnimation>().Death();
+            _hp = 0;
+        }
+
         return true;
     }
 
