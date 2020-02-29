@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -21,7 +21,7 @@ public class Pathfinding : MonoBehaviour
 		StartCoroutine(FindPath(startPos, targetPos));
 	}
 
-	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
+    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
 	{
 
 		Vector3[] waypoints = new Vector3[0];
