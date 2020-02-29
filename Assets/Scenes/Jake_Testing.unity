@@ -290,7 +290,8 @@ PrefabInstance:
       propertyPath: _ignoreClickLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4562705643407256740, guid: a9d1d19a6986b214d9ab238279958dac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a9d1d19a6986b214d9ab238279958dac, type: 3}
 --- !u!1 &1031430866
 GameObject:

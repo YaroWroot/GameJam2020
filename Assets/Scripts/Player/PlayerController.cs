@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController _characterController;
     public Collider _intersectCheck;
 
+    private GameObject _interactableMovingTo = null;
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
 
@@ -35,20 +36,37 @@ public class PlayerController : MonoBehaviour
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
                     target.GetComponent<IInteractable>().Interact(this);
+
+                    if (_interactableMovingTo != null) _interactableMovingTo = null;
                 }
                 else
                 {
+                    _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
                 }
             }
         }
         if(Input.GetMouseButton(1))
         {
+            _interactableMovingTo = null;
             LocateHit();
         }
  
         MoveCharacter();
+        CheckIfStoredInteractIsInRange();
         DeleteMovePointLocation();
+    }
+
+    private void CheckIfStoredInteractIsInRange()
+    {
+        if (_interactableMovingTo == null) return;
+
+        if (_intersectCheck.bounds.Intersects(_interactableMovingTo.transform.GetComponent<Collider>().bounds))
+        {
+            _interactableMovingTo.GetComponent<IInteractable>().Interact(this);
+
+            if (_interactableMovingTo != null) _interactableMovingTo = null;
+        }
     }
 
     private float DistanceToTarget(Vector3 target)
