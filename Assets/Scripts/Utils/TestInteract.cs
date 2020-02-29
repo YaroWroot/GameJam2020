@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestInteract : MonoBehaviour, IInteractable
 {
-    public bool Interact()
+    public bool Interact(PlayerController player)
     {
         Debug.Log("Hi I'm " + transform.name);
         return true;

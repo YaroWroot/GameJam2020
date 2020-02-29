@@ -4,9 +4,12 @@ using UnityEngine;
 
 public interface IInteractable
 {
+
     /// <summary>
     /// For use with the player controller
     /// </summary>
+    /// <param name="player"></param>
     /// <returns>true if interaction is a success</returns>
-    bool Interact();
+    bool Interact(PlayerController player);
+
 }

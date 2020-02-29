@@ -12,6 +12,6 @@ using UnityEngine;
 public abstract class Pickupable : MonoBehaviour
 {
 
-
+    public abstract bool Interact(PlayerController player);
 
 }

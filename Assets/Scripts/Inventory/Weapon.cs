@@ -5,16 +5,10 @@ using UnityEngine;
 public class Weapon : Pickupable
 {
 
-    // Start is called before the first frame update
-    void Start()
+    public override bool Interact(PlayerController player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Hello, World!");
+        return true;
     }
 
 }
