@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TestpHealth : MonoBehaviour
 {
-
-    public float maxHealth = 100;
-    public float currentHealth = 70;
+    // Max & Current Health
+    public float maxHealth;
+    public float currentHealth;
 
     // Start is called before the first frame update
     void Start()
