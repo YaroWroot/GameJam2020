@@ -5,11 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Transform target;
-    float speed = 5;
+    public float speed;
     Vector3[] path;
     int targetIndex;
 
     private void Start()
+    {
+        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+    private void Update()
     {
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }

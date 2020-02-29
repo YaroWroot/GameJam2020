@@ -30,7 +30,7 @@ public class Node : IHeapItem<Node>
 		}
 	}
 
-	public int HeapIndexa
+	public int HeapIndex
 	{
 		get
 		{
