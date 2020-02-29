@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
-                    target.GetComponent<IInteractable>().Interact();
+                    target.GetComponent<IInteractable>().Interact(this);
                 }
                 else
                 {
