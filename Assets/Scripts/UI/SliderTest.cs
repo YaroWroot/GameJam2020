@@ -13,9 +13,5 @@ public class SliderTest : MonoBehaviour
 
     float i;
 
-    public float ValueChange()
-    {
-        i = 50.0f;
-        return i;
-    }
+    
 }
