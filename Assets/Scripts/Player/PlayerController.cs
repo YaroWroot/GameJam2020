@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController _characterController;
     public Collider _intersectCheck;
 
+    private GameObject _interactableMovingTo;
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
 
@@ -35,9 +36,15 @@ public class PlayerController : MonoBehaviour
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
                     target.GetComponent<IInteractable>().Interact();
+
+                    if(_interactableMovingTo != null)
+                    {
+                        _interactableMovingTo = null;
+                    }
                 }
                 else
                 {
+                    _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
                 }
             }
