@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 427858594892174161}
   - component: {fileID: 252954123406595558}
   - component: {fileID: 5712479245878204435}
+  - component: {fileID: 5159496993385671898}
   - component: {fileID: 4562705643407256740}
   m_Layer: 10
   m_Name: Player
@@ -276,6 +277,18 @@ MonoBehaviour:
   _playerAsset: {fileID: 3559603929641368629}
   _characterController: {fileID: 427858594892174161}
   _intersectCheck: {fileID: 252954123406595558}
+--- !u!114 &5159496993385671898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559603931393692899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa76af125316674b9897161fdb80145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4562705643407256740
 MonoBehaviour:
   m_ObjectHideFlags: 0
