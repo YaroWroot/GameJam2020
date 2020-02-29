@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
+                    MoveLocSpriteSpawn();
                 }
             }
         }
@@ -106,15 +107,20 @@ public class PlayerController : MonoBehaviour
             {
                 _moveToPoint = hit.point;
             }
-            
-            if(_movePointLocation == null)
-            {
-                _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
-            }
-            else
-            {
-                _movePointLocation.position = _moveToPoint;
-            }
+
+            MoveLocSpriteSpawn();
+        }
+    }
+
+    private void MoveLocSpriteSpawn()
+    {
+        if (_movePointLocation == null)
+        {
+            _movePointLocation = Instantiate(GameAssets.i.MovePointIndicator, _moveToPoint, Quaternion.identity);
+        }
+        else
+        {
+            _movePointLocation.position = _moveToPoint;
         }
     }
 
