@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130a9cc4e34e5d7449bb94b190058d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraOffset: {x: 0, y: 18, z: -10}
+  _cameraOffset: {x: 0, y: 10, z: -5}
 --- !u!1001 &897056242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,6 +225,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 252954123406595558, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 252954123406595558, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 252954123406595558, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 252954123406595558, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 427858594892174161, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3559603931393692898, guid: a9d1d19a6986b214d9ab238279958dac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -233,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 3559603931393692898, guid: a9d1d19a6986b214d9ab238279958dac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 1.023
       objectReference: {fileID: 0}
     - target: {fileID: 3559603931393692898, guid: a9d1d19a6986b214d9ab238279958dac,
         type: 3}
@@ -290,6 +315,11 @@ PrefabInstance:
       propertyPath: _ignoreClickLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 5742644743391633357, guid: a9d1d19a6986b214d9ab238279958dac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4562705643407256740, guid: a9d1d19a6986b214d9ab238279958dac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a9d1d19a6986b214d9ab238279958dac, type: 3}
@@ -304,7 +334,6 @@ GameObject:
   - component: {fileID: 1031430870}
   - component: {fileID: 1031430869}
   - component: {fileID: 1031430868}
-  - component: {fileID: 1031430867}
   - component: {fileID: 1031430871}
   m_Layer: 0
   m_Name: Ground
@@ -313,20 +342,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1031430867
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031430866}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1031430868
 MeshRenderer:
   m_ObjectHideFlags: 0
