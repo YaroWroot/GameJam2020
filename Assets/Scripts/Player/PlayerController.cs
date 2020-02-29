@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
             }
             else if(target.tag == "Interactable")
             {
-                //Debug.Log(target.transform.GetComponent<Collider>());
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
                     target.GetComponent<IInteractable>().Interact();
@@ -41,11 +40,9 @@ public class PlayerController : MonoBehaviour
                 {
                     _moveToPoint = target.transform.position;
                 }
-
-                //Debug.Log("Distance to Interact " + DistanceToTarget(gameObject.transform.position));
             }
         }
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButton(1))
         {
             LocateHit();
         }
@@ -70,8 +67,6 @@ public class PlayerController : MonoBehaviour
         {
             retVal = hit.collider.gameObject;
         }
-
-        Debug.Log(hit.collider.name);
 
         return retVal;
     }
