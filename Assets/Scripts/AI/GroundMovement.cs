@@ -24,24 +24,29 @@ public class GroundMovement : MonoBehaviour
 
     void Update()
     {
+        _characterAnimation.SetMovement(true);
         SetTarget();
-        if (IsInMeleeRangeOf(_target))
-        {
-            StartCoroutine(MeleeAttack());
-            _characterAnimation.SetMovement(false);
-            RotateTowards(_target);
-        }
-        else
-        {
-            _characterAnimation.SetMovement(true);
-        }
+
+        //Will call attack but when enemy spawns from waves this way, animations will break unline other method.
+
+        //if (IsInMeleeRangeOf(_target))
+        //{
+        //    StartCoroutine(MeleeAttack());
+        //    _characterAnimation.SetMovement(false);
+        //    RotateTowards(_target);
+        //}
+        //else
+        //{
+        //    _characterAnimation.SetMovement(true);
+        //}
     }
 
     IEnumerator MeleeAttack()
     {
+        yield return new WaitForSeconds(2f);
         int rnd = Random.Range(0, 3);
         _characterAnimation.Attack(rnd);
-        yield return new WaitForSeconds(2f);
+        _target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
     }
 
     private bool IsInMeleeRangeOf(Transform _target)
@@ -69,14 +74,14 @@ public class GroundMovement : MonoBehaviour
     {
         var target = GameObject.FindGameObjectWithTag("Player");
         agent.SetDestination(target.transform.position);
-        //if(StaticFunctions.DistanceToTarget(transform.position, target.transform.position) > 4f)
-        //{
-        //    _characterAnimation.SetMovement(true);
-        //}
-        //else
-        //{
-        //    _characterAnimation.SetMovement(false);
-        //}        
+        if (StaticFunctions.DistanceToTarget(transform.position, target.transform.position) > 4f)
+        {
+            _characterAnimation.SetMovement(true);
+        }
+        else
+        {
+            _characterAnimation.SetMovement(false);
+        }
     }
 
 

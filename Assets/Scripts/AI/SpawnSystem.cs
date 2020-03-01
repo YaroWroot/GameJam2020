@@ -19,7 +19,7 @@ public class SpawnSystem : MonoBehaviour
 
     public Transform[] _spawnPoints;
 
-    public float _waveCooldown = 5f;
+    public float _waveCooldown = 1f;
     private float _waveCountdown;
 
     private float _checkCountdown = 1f;
