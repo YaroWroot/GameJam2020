@@ -17,8 +17,10 @@ public class SpawnSystem : MonoBehaviour
     public Wave[] _waves;
     private int _nextWave = 0;
 
+    public Transform[] _spawnPoints;
+
     public float _waveCooldown = 5f;
-    public float _waveCountdown;
+    private float _waveCountdown;
 
     private float _checkCountdown = 1f;
 
@@ -35,8 +37,7 @@ public class SpawnSystem : MonoBehaviour
         {
             if (!EnemyIsAlive())
             {
-                Debug.Log("Wave Completed");
-                return;
+                WaveComplete();
             }
             else
             {
@@ -54,6 +55,22 @@ public class SpawnSystem : MonoBehaviour
         else
         {
             _waveCountdown -= Time.deltaTime;
+        }
+    }
+
+    void WaveComplete()
+    {
+        _state = SpawnState.Counting;
+        _waveCountdown = _waveCooldown;
+
+        if (_nextWave + 1 > _waves.Length - 1)
+        {
+            _nextWave = 0;
+            //Loop for infinite waves here
+        }
+        else
+        {
+            _nextWave++;
         }
     }
 
@@ -91,6 +108,7 @@ public class SpawnSystem : MonoBehaviour
     private void SpawnEnemy(Transform _enemy)
     {
         Debug.Log("Spawning Enemy: " + _enemy.name);
+        Transform _sp = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
         Instantiate(_enemy, transform.position, transform.rotation);
     }
 
