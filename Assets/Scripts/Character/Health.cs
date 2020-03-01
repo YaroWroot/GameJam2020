@@ -8,6 +8,13 @@ public class Health : MonoBehaviour
     public float _maxHp = 100.0f;
     public float _ap = 1.0f;
 
+    private CharacterAnimation _characterAnimation;
+
+    private void Awake()
+    {
+        _characterAnimation = GetComponent<CharacterAnimation>();
+    }
+
     public bool Heal(float value)
     {
         if((_hp + value) > _maxHp)
@@ -26,9 +33,12 @@ public class Health : MonoBehaviour
 
         if(_hp <= 0)
         {
-            GetComponent<CharacterAnimation>().Death();
+            _characterAnimation.Death();
             _hp = 0;
+            return true;
         }
+
+        _characterAnimation.Hit();
 
         return true;
     }

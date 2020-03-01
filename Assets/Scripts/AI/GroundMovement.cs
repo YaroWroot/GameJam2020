@@ -7,6 +7,9 @@ public class GroundMovement : MonoBehaviour
 {
     private GameObject target;
     public NavMeshAgent agent;
+
+    public CharacterAnimation _characterAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,14 @@ public class GroundMovement : MonoBehaviour
     {
         var target = GameObject.FindGameObjectWithTag("Player");
         agent.SetDestination(target.transform.position);
+        if(StaticFunctions.DistanceToTarget(transform.position, target.transform.position) > 0.5f)
+        {
+            _characterAnimation.SetMovement(true);
+        }
+        else
+        {
+            _characterAnimation.SetMovement(false);
+        }        
     }
 
 

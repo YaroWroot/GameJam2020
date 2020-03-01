@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _interactableMovingTo = null;
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
-    private bool _inMoveTrigger = false;
+    private bool _stopMovement = false;
 
     private void Awake()
     {
@@ -28,11 +28,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _stopMovement = false;
             var target = LeftMouseHit();
 
             if(target.tag == "Enemy")
             {
+                Debug.Log("Hit Enemy");
+                if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
+                {
+                    _animator.SetTrigger("Attack");
 
+                    if (_interactableMovingTo != null) _interactableMovingTo = null;
+                }
+                else
+                {
+                    _interactableMovingTo = target;
+                    _moveToPoint = target.transform.position;               
+                }
             }
             else if(target.tag == "Interactable")
             {
@@ -46,18 +58,20 @@ public class PlayerController : MonoBehaviour
                 {
                     _interactableMovingTo = target;
                     _moveToPoint = target.transform.position;
-                    MoveLocSpriteSpawn();
+                    
                 }
             }
         }
         if(Input.GetMouseButton(1))
         {
+            _stopMovement = false;
             _interactableMovingTo = null;
             LocateHit();
         }
  
         MoveCharacter();
         CheckIfStoredInteractIsInRange();
+        MoveLocSpriteSpawn();
         DeleteMovePointLocation();
     }
 
@@ -67,17 +81,26 @@ public class PlayerController : MonoBehaviour
 
         if (_intersectCheck.bounds.Intersects(_interactableMovingTo.transform.GetComponent<Collider>().bounds))
         {
-            _interactableMovingTo.GetComponent<IInteractable>().Interact(this);
+            _stopMovement = true;
+            Debug.Log("CheckIfStoredInteractIsInRange");
+
+            if (_interactableMovingTo.tag == "Enemy")
+            {
+                
+                Debug.Log("Hit Enemy");
+                _animator.SetTrigger("Attack");
+            }
+            else
+            {
+                Debug.Log("Interact");
+                _interactableMovingTo.GetComponent<IInteractable>().Interact(this);
+            }
 
             if (_interactableMovingTo != null) _interactableMovingTo = null;
 
-
+            //_moveToPoint = transform.position;
+            //_stopMovement = false;
         }
-    }
-
-    private float DistanceToTarget(Vector3 target)
-    {
-        return Vector3.Distance((transform.position - new Vector3(0, transform.position.y, 0)), target);
     }
 
     private GameObject LeftMouseHit()
@@ -90,6 +113,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 500, ~_ignorePlayer))
         {
             retVal = hit.collider.gameObject;
+            Debug.Log(hit.collider.tag);
         }
 
         return retVal;
@@ -113,7 +137,6 @@ public class PlayerController : MonoBehaviour
                 _moveToPoint = hit.point;
             }
 
-            MoveLocSpriteSpawn();
         }
     }
 
@@ -131,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
-        if(DistanceToTarget(_moveToPoint) > 0.5f)
+        if(StaticFunctions.DistanceToTarget(transform.position, _moveToPoint) > 1f && !_stopMovement)
         {
             Quaternion lookAtRot = Quaternion.LookRotation(_moveToPoint - transform.position, Vector3.up);
 
@@ -150,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     private void DeleteMovePointLocation()
     {
-        if (DistanceToTarget(_moveToPoint) < 0.5f && _movePointLocation != null)
+        if (StaticFunctions.DistanceToTarget(transform.position, _moveToPoint) < 1f || _stopMovement && _movePointLocation != null)
         {
             Destroy(_movePointLocation.gameObject);
             _movePointLocation = null;

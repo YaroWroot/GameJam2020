@@ -11,6 +11,39 @@ public class CharacterAnimation : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
+    public void Attack(int attackType)
+    {
+        switch (attackType)
+        {
+            case 0:
+            default:
+                _animator.SetInteger("AIAttack", 1);
+                break;
+            case 1:
+                _animator.SetInteger("AIAttack", 2);
+                break;
+            case 2:
+                _animator.SetInteger("AIAttack", 3);
+                break;
+        }
+    }
+
+    public void Hit()
+    {
+        int val = Random.Range(1, 3);
+        _animator.SetInteger("Impact", val);
+    }
+
+    public void Block()
+    {
+        _animator.SetTrigger("Block");
+    }
+
+    public void SetMovement(bool value)
+    {
+        _animator.SetBool("Movement", value);
+    }
+
     public void Death()
     {
         _animator.SetTrigger("Death");
