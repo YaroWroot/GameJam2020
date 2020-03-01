@@ -38,6 +38,7 @@ public class GameAssets : MonoBehaviour
     /// Move Point Indicator
     /// </summary>
     public Transform MovePointIndicator;
+    public Transform PlayerArrowProjectile;
 
 
     public Material[] EnemyMaterials;

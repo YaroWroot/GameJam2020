@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,11 +17,14 @@ public class PlayerController : MonoBehaviour
     private Transform _movePointLocation;
     private Vector3 _moveToPoint;
     private bool _stopMovement = false;
+    private PlayerWeapons _playerWeapons;
 
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
         _animator.enabled = true;
+
+        _playerWeapons = GetComponentInChildren<PlayerWeapons>();
     }
 
     // Update is called once per frame
@@ -68,8 +72,23 @@ public class PlayerController : MonoBehaviour
             _interactableMovingTo = null;
             LocateHit();
         }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            List<Transform> enemiesInRange = new List<Transform>();
+            var count = enemies.Length;
 
-        LookToClick(_moveToPoint);
+            foreach (var e in enemies)
+            {
+                enemiesInRange.Add(e.transform);
+            }
+
+
+            var nearestEnemy = StaticFunctions.GetClosestEnemy(transform, enemiesInRange.ToArray());
+            LookToClick(nearestEnemy.position, 100);
+            _playerWeapons.FireBow(_animator);
+        }
+
         MoveCharacter();
         CheckIfStoredInteractIsInRange();
         MoveLocSpriteSpawn();
@@ -143,20 +162,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void LookToClick(Vector3 target)
+    private void LookToClick(Vector3 target, float multiplier)
     {
         Quaternion lookAtRot = Quaternion.LookRotation(target - transform.position, Vector3.up);
 
         transform.rotation = Quaternion.Slerp(transform.rotation,
                                               new Quaternion(0, lookAtRot.y, 0, lookAtRot.w),
-                                              Time.deltaTime * 10);
+                                              Time.deltaTime * multiplier);
     }
 
     private void MoveCharacter()
     {
         if(StaticFunctions.DistanceToTarget(transform.position, _moveToPoint) > 1f && !_stopMovement)
         {
-            
+            LookToClick(_moveToPoint, 10);
 
             _characterController.SimpleMove(transform.forward * _speed);
             _animator.SetBool("Movement", true);
