@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(WeaponUser))]
+public class PlayerController : BetterMonoBehaviour
 {
     private enum State
     {
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _enemyInTrigger;
     private PlayerWeapons _playerWeapons;
     private State _state = State.Normal;
+    private WeaponUser _weaponUser;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _animator.enabled = true;
 
         _playerWeapons = GetComponentInChildren<PlayerWeapons>();
+        _weaponUser = GetComponent<WeaponUser>();
     }
 
     // Update is called once per frame
@@ -60,25 +63,31 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            else
+            else if (target.tag == "Enemy")
             {
+
                 _playerWeapons.FireBow(_animator);
                 //_animator.SetTrigger("Attack");
                 //if (_enemyInTrigger != null) _playerWeapons.AttackNormal(_enemyInTrigger);
+
+                Health enemy = target.GetComponent<Health>();
+                if (enemy == null)
+                {
+                    Debug.LogError("Object tagged as an enemy but doesn't have health... fix this!", target);
+                }
+                else
+                {
+                    _weaponUser.UseWeapon(enemy);
+                }
             }
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             _playerWeapons.FireMultipleBow(_animator);
+            _weaponUser.SwapWeapons();
         }
 
-        //if (Input.GetMouseButton(1))
-        //{
-        //    _stopMovement = false;
-        //    _interactableMovingTo = null;
-        //    LocateHit();
-        //}
         MoveCharacter();
     }
 
