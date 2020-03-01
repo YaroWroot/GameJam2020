@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
         {
             _characterAnimation.Death();
 
-            gameObject.tag = "";
+            gameObject.tag = "Untagged";
 
             StartCoroutine(DeathDestroy(_characterAnimation.GetAnimationLength("A_Gladiator_Death")));
             return true;
