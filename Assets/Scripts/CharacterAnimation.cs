@@ -29,6 +29,20 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
 
+    private int _playerAttackCount = 0;
+
+    public void PlayerAttack()
+    {
+        _animator.SetInteger("AIAttack", _playerAttackCount + 1);
+
+        _playerAttackCount++;
+
+        if(_playerAttackCount == 2)
+        {
+            _playerAttackCount = 0;
+        }
+    }
+
     public float GetAnimationLength(string name)
     {
         var clips = _animator.runtimeAnimatorController.animationClips;

@@ -89,6 +89,7 @@ MonoBehaviour:
     m_Bits: 1024
   _playerAsset: {fileID: 4156304848934956397}
   _characterController: {fileID: 427858594892174161}
+  _characterAnimation: {fileID: 534908845379787052}
   _intersectCheck: {fileID: 252954123406595558}
   _animator: {fileID: 0}
 --- !u!114 &1484722556837799221
