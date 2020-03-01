@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : BetterMonoBehaviour
 {
     public float _hp = 50.0f;
     public float _maxHp = 100.0f;

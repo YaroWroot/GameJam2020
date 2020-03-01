@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
 {
     private enum State
     {
@@ -68,7 +67,6 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            else
             {
                 _playerWeapons.FireBow(_animator);
                 //_animator.SetTrigger("Attack");
@@ -76,7 +74,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Q))
         {
             _playerWeapons.FireMultipleBow(_animator);
         }
