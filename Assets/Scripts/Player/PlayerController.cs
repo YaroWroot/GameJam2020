@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Animator _animator;
 
     private bool _stopMovement = false;
+    private GameObject _enemyInTrigger;
     private PlayerWeapons _playerWeapons;
     private State _state = State.Normal;
 
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _animator.SetTrigger("Attack");
+                if (_enemyInTrigger != null) _playerWeapons.AttackNormal(_enemyInTrigger);
             }
         }
 
@@ -77,6 +79,16 @@ public class PlayerController : MonoBehaviour
         //    LocateHit();
         //}
         MoveCharacter();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Enemy") _enemyInTrigger = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _enemyInTrigger = null;
     }
 
     private void LookAtMouse()

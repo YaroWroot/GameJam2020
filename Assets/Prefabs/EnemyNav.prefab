@@ -341,7 +341,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6492274237718535689}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
@@ -2229,6 +2229,7 @@ GameObject:
   - component: {fileID: 6492274239615100027}
   - component: {fileID: 6492274239615100029}
   - component: {fileID: 6492274239615100026}
+  - component: {fileID: 4281791976836445141}
   m_Layer: 0
   m_Name: SK_Gladiator
   m_TagString: Untagged
@@ -2283,6 +2284,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ae6e098e73e154c809e9705f7abfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &4281791976836445141
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492274239615100024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6492274239628230106
 GameObject:
   m_ObjectHideFlags: 0

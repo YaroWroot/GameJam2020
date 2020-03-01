@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2114a1cccb9ae784884975a9260ac831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damage: 20
   _speed: 1000
   _owner: Player
 --- !u!136 &6984357248005574668
