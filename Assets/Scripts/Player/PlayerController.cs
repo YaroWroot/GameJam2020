@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(WeaponUser))]
+public class PlayerController : BetterMonoBehaviour
 {
     private enum State
     {
@@ -24,6 +26,7 @@ using UnityEngine;
     private GameObject _enemyInTrigger;
     private PlayerWeapons _playerWeapons;
     private State _state = State.Normal;
+    private WeaponUser _weaponUser;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ using UnityEngine;
         _animator.enabled = true;
 
         _playerWeapons = GetComponentInChildren<PlayerWeapons>();
+        _weaponUser = GetComponent<WeaponUser>();
     }
 
     private void OnDestroy()
@@ -67,16 +71,31 @@ using UnityEngine;
 
                 }
             }
+            else if (target.tag == "Enemy")
             {
+
                 _playerWeapons.FireBow(_animator);
                 //_animator.SetTrigger("Attack");
                 //if (_enemyInTrigger != null) _playerWeapons.AttackNormal(_enemyInTrigger);
+
+                Health enemy = target.GetComponent<Health>();
+                if (enemy == null)
+                {
+                    Debug.LogError("Object tagged as an enemy but doesn't have health... fix this!", target);
+                }
+                else
+                {
+                    _weaponUser.UseWeapon(enemy);
+                }
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             _playerWeapons.FireMultipleBow(_animator);
+            _weaponUser.SwapWeapons();
         }
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -90,6 +109,7 @@ using UnityEngine;
         //    _interactableMovingTo = null;
         //    LocateHit();
         //}
+
         MoveCharacter();
     }
 
