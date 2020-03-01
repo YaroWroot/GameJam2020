@@ -68,7 +68,8 @@ public class PlayerController : MonoBehaviour
             _interactableMovingTo = null;
             LocateHit();
         }
- 
+
+        LookToClick(_moveToPoint);
         MoveCharacter();
         CheckIfStoredInteractIsInRange();
         MoveLocSpriteSpawn();
@@ -110,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         GameObject retVal = null;
 
-        if (Physics.Raycast(ray, out hit, 500, ~_ignorePlayer))
+        if (Physics.Raycast(ray, out hit, 500, ~_ignorePlayer) && hit.collider.tag != "Obstacle")
         {
             retVal = hit.collider.gameObject;
             Debug.Log(hit.collider.tag);
@@ -124,19 +125,9 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        var tempMovePoint = _moveToPoint;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.gameObject.layer == _ignoreClickLayer.value)
-            {
-                _moveToPoint = tempMovePoint;
-            }
-            else
-            {
-                _moveToPoint = hit.point;
-            }
-
+        if (Physics.Raycast(ray, out hit, 500, ~_ignorePlayer) && hit.collider.tag != "Obstacle")
+        {            
+            _moveToPoint = hit.point;
         }
     }
 
@@ -152,15 +143,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void LookToClick(Vector3 target)
+    {
+        Quaternion lookAtRot = Quaternion.LookRotation(target - transform.position, Vector3.up);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+                                              new Quaternion(0, lookAtRot.y, 0, lookAtRot.w),
+                                              Time.deltaTime * 10);
+    }
+
     private void MoveCharacter()
     {
         if(StaticFunctions.DistanceToTarget(transform.position, _moveToPoint) > 1f && !_stopMovement)
         {
-            Quaternion lookAtRot = Quaternion.LookRotation(_moveToPoint - transform.position, Vector3.up);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                  new Quaternion(0, lookAtRot.y, 0, lookAtRot.w),
-                                                  Time.deltaTime * 10);
+            
 
             _characterController.SimpleMove(transform.forward * _speed);
             _animator.SetBool("Movement", true);
