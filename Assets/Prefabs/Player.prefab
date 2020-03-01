@@ -107,7 +107,7 @@ MonoBehaviour:
   _handBow: {fileID: 513472750631167647}
   _unequippedBow: {fileID: 3971296389208119138}
   _sword: {fileID: 7964112899937406533}
-  _bowCoolDown: 5
+  _bowCoolDown: 1
 --- !u!114 &534908845379787052
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,54 +5,72 @@ using UnityEngine.AI;
 
 public class GroundMovement : MonoBehaviour
 {
-    private GameObject target;
     public NavMeshAgent agent;
     public Animator _animator;
     public Transform _target;
-    public float meleeRange = 4f; //Match to current navMeshAgent stopping distance
+    public float meleeRange = 2f; //Match to current navMeshAgent stopping distance
     public float rotationSpeed = 10f;
-    private bool _stopMovement = false;
+
+    public bool attacking = false;
+
+
+    public float attackDelay = 1f;
 
     public CharacterAnimation _characterAnimation;
+
+    private void Awake()
+    {
+        _target = GameObject.FindGameObjectWithTag("Player").transform;        
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
-        SetTarget();
         _characterAnimation.SetMovement(true);
     }
 
     void Update()
     {
         _characterAnimation.SetMovement(true);
-        SetTarget();
 
-        //Will call attack but when enemy spawns from waves this way, animations will break unline other method.
+        Debug.Log("Distance to player: " + StaticFunctions.DistanceToTarget(transform.position, _target.position));
 
-        //if (IsInMeleeRangeOf(_target))
-        //{
-        //    StartCoroutine(MeleeAttack());
-        //    _characterAnimation.SetMovement(false);
-        //    RotateTowards(_target);
-        //}
-        //else
-        //{
-        //    _characterAnimation.SetMovement(true);
-        //}
+        if (IsInMeleeRangeOf && !attacking)
+        {
+            Debug.Log("MeleeRange");
+            attacking = true;
+            Debug.Log("MeleeAttack");
+            _characterAnimation.SetMovement(false);
+            agent.enabled = false;
+            int rnd = Random.Range(0, 3);
+            _characterAnimation.Attack(rnd);
+            agent.enabled = true;
+            _target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
+            StartCoroutine(MeleeAttack());
+            RotateTowards(_target);
+        }
+        else if(!IsInMeleeRangeOf)
+        {
+            _characterAnimation.SetMovement(true);
+            _characterAnimation.Attack(3);
+        }
+
+        agent.SetDestination(_target.transform.position);
     }
 
-    IEnumerator MeleeAttack()
+    public IEnumerator MeleeAttack()
     {
-        yield return new WaitForSeconds(2f);
-        int rnd = Random.Range(0, 3);
-        _characterAnimation.Attack(rnd);
-        _target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
+        yield return new WaitForSeconds(attackDelay);
+        
+        attacking = false;
     }
 
-    private bool IsInMeleeRangeOf(Transform _target)
+    private bool IsInMeleeRangeOf
     {
-        float distance = Vector3.Distance(transform.position, _target.position);
-        return distance < meleeRange;
+        get
+        {
+            return StaticFunctions.DistanceToTarget(transform.position, _target.position) < meleeRange;
+        }
     }
 
     private void RotateTowards(Transform _target)
@@ -60,28 +78,6 @@ public class GroundMovement : MonoBehaviour
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-    }
-
-    private void LateUpdate()
-    {
-        if (target == null)
-        {
-            SetTarget();
-        }
-    }
-
-    private void SetTarget()
-    {
-        var target = GameObject.FindGameObjectWithTag("Player");
-        agent.SetDestination(target.transform.position);
-        if (StaticFunctions.DistanceToTarget(transform.position, target.transform.position) > 4f)
-        {
-            _characterAnimation.SetMovement(true);
-        }
-        else
-        {
-            _characterAnimation.SetMovement(false);
-        }
     }
 
 

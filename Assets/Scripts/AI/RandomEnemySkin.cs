@@ -6,6 +6,6 @@ public class RandomEnemySkin : MonoBehaviour
 {
     private void Awake()
     {
-        GetComponentInChildren<SkinnedMeshRenderer>().material = GameAssets.i.EnemyMaterials[Random.Range(0, 4)];
+        GetComponentInChildren<SkinnedMeshRenderer>().material = GameAssets.i.EnemyMaterials[Random.Range(0, 3)];
     }
 }

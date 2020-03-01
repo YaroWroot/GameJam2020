@@ -26,6 +26,10 @@ public class CharacterAnimation : MonoBehaviour
             case 2:
                 _animator.SetInteger("AIAttack", 3);
                 break;
+            case 3:
+                _animator.SetInteger("AIAttack", 0);
+                break;
+
         }
     }
 

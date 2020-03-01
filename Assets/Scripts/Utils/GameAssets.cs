@@ -40,6 +40,7 @@ public class GameAssets : MonoBehaviour
     public Transform MovePointIndicator;
     public Transform PlayerArrowProjectile;
     public Transform PointsPopup;
+    public Transform Enemy;
 
 
     public Material[] EnemyMaterials;

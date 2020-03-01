@@ -62,14 +62,15 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                _animator.SetTrigger("Attack");
-                if (_enemyInTrigger != null) _playerWeapons.AttackNormal(_enemyInTrigger);
+                _playerWeapons.FireBow(_animator);
+                //_animator.SetTrigger("Attack");
+                //if (_enemyInTrigger != null) _playerWeapons.AttackNormal(_enemyInTrigger);
             }
         }
 
         if (Input.GetKey(KeyCode.Q))
         {
-            _playerWeapons.FireBow(_animator);
+            _playerWeapons.FireMultipleBow(_animator);
         }
 
         //if (Input.GetMouseButton(1))

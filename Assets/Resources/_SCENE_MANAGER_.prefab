@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6019718009998371493}
   - component: {fileID: 1586819690290419815}
   - component: {fileID: 9064517005514020480}
+  - component: {fileID: 7484441538157589223}
   m_Layer: 0
   m_Name: _SCENE_MANAGER_
   m_TagString: _SCENE_MANAGER_
@@ -50,6 +51,7 @@ MonoBehaviour:
     type: 3}
   PointsPopup: {fileID: 1213111585124137877, guid: 597c1e831d4ccff45b0f3667cc155344,
     type: 3}
+  Enemy: {fileID: 6635711604131489487, guid: fe60de7d3a6478b42972db7817816516, type: 3}
   EnemyMaterials:
   - {fileID: 2100000, guid: 1f88aa0dd78b20347b05a6158c0f85b1, type: 2}
   - {fileID: 2100000, guid: 2cce710d638b4114d89a1ae8bd266c3f, type: 2}
@@ -66,3 +68,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b6e00cc1a131d41a63b3a8304b2728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7484441538157589223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019718009998371492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd34d1ccccd108445a836c5045b15da9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waves:
+  - _count: 1
+    _rate: 1
+  - _count: 2
+    _rate: 1
+  - _count: 2
+    _rate: 1
+  - _count: 3
+    _rate: 0
+  - _count: 5
+    _rate: 0
+  - _count: 5
+    _rate: 0
+  - _count: 7
+    _rate: 0
+  - _count: 7
+    _rate: 0
+  - _count: 10
+    _rate: 0
+  - _count: 15
+    _rate: 0
+  _spawnPoints: []
+  _waveCooldown: 1

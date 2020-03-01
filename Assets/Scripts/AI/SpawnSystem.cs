@@ -9,7 +9,6 @@ public class SpawnSystem : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public Transform _enemy;
         public int _count;
         public float _rate;
     }
@@ -33,14 +32,17 @@ public class SpawnSystem : MonoBehaviour
 
     private void Update()
     {
+
         if(_state == SpawnState.Waiting)
         {
             if (!EnemyIsAlive())
             {
+                Debug.Log("!EnemyIsAlive()");
                 WaveComplete();
             }
             else
             {
+                Debug.Log("EnemyIsAlive()");
                 return;
             }
         }
@@ -76,18 +78,12 @@ public class SpawnSystem : MonoBehaviour
 
     bool EnemyIsAlive()
     {
-        _checkCountdown -= Time.deltaTime;
-        if(_checkCountdown <= 0f)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            _checkCountdown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Enemy") == null)
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }
-
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning Wave: " + _wave._count);
@@ -95,8 +91,8 @@ public class SpawnSystem : MonoBehaviour
 
         for (int i = 0; i < _wave._count; i++)
         {
-            SpawnEnemy(_wave._enemy);
-            yield return new WaitForSeconds(1f / _wave._rate);
+            SpawnEnemy(GameAssets.i.Enemy);
+            yield return new WaitForSeconds(1f);
         }
 
         _state = SpawnState.Waiting;
@@ -109,7 +105,7 @@ public class SpawnSystem : MonoBehaviour
     {
         Debug.Log("Spawning Enemy: " + _enemy.name);
         Transform _sp = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-        Instantiate(_enemy, transform.position, transform.rotation);
+        Instantiate(_enemy, _sp.transform.position, Quaternion.identity);
     }
 
 }

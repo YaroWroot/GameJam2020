@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
 
     private CharacterAnimation _characterAnimation;
 
+    private GroundMovement _enemy;
+
     private void Awake()
     {
         _characterAnimation = GetComponent<CharacterAnimation>();
@@ -38,13 +40,19 @@ public class Health : MonoBehaviour
         {
             _characterAnimation.Death();
 
+            if(gameObject.tag == "Enemy")
+            {
+                gameObject.GetComponent<GroundMovement>()._target = null;
+                _characterAnimation.SetMovement(false);
+            }
+
             gameObject.tag = "Untagged";
 
             StartCoroutine(DeathDestroy(_characterAnimation.GetAnimationLength("A_Gladiator_Death")));
             return true;
         }
 
-        _characterAnimation.Hit();
+        //_characterAnimation.Hit();
 
         return true;
     }
