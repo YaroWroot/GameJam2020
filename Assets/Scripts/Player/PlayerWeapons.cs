@@ -13,6 +13,11 @@ public class PlayerWeapons : MonoBehaviour
     private float _bowAnimTime = 3.0f;
     private bool _bowCoolDownCheck = false;
 
+
+    private void Awake()
+    {
+    }
+
     public void FireBow(Animator animator)
     {
         if (!_bowCoolDownCheck)
@@ -25,6 +30,8 @@ public class PlayerWeapons : MonoBehaviour
             _sword.gameObject.SetActive(false);
             animator.SetTrigger("BowShoot");
             StartCoroutine(SwapBowBack());
+            StartCoroutine(ShootArrow());
+            //EventManager.TriggerEvent("BowCoolDown");
             StartCoroutine(BowCoolDown());
         }
     }
@@ -33,12 +40,16 @@ public class PlayerWeapons : MonoBehaviour
     {
         yield return new WaitForSeconds(_bowAnimTime);
 
-        var arrow = Instantiate(GameAssets.i.PlayerArrowProjectile, transform.position + transform.forward, transform.rotation);
-        arrow.GetComponent<Rigidbody>().AddForce(transform.forward * arrow.GetComponent<Projectile>()._speed);
-
         _unequippedBow.gameObject.SetActive(true);
         _sword.gameObject.SetActive(true);
         _handBow.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShootArrow()
+    {
+        yield return new WaitForSeconds((_bowAnimTime / 2) + 0.5f);
+        var arrow = Instantiate(GameAssets.i.PlayerArrowProjectile, transform.position + transform.forward, transform.rotation);
+        arrow.GetComponent<Rigidbody>().AddForce(transform.forward * arrow.GetComponent<Projectile>()._speed);
     }
 
     private IEnumerator BowCoolDown()

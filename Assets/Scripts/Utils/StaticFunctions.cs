@@ -25,4 +25,20 @@ public static class StaticFunctions
         return tMin;
     }
 
+    public static Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        Vector3 retVal = Vector3.zero;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            retVal = hit.point;
+            Debug.Log(hit.collider.tag);
+        }
+
+        return retVal;
+    }
+
 }

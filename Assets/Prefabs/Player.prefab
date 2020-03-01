@@ -66,8 +66,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.89, y: 2, z: 1.42}
-  m_Center: {x: 0, y: 0, z: 0.5}
+  m_Size: {x: 0.89, y: 2, z: 1.87}
+  m_Center: {x: 0, y: 0, z: 0.83}
 --- !u!114 &5712479245878204435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
     m_Bits: 1024
   _playerAsset: {fileID: 4156304848934956397}
   _characterController: {fileID: 427858594892174161}
+  _characterAnimation: {fileID: 534908845379787052}
   _intersectCheck: {fileID: 252954123406595558}
   _animator: {fileID: 0}
 --- !u!114 &1484722556837799221

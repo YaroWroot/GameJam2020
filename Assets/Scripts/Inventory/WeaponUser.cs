@@ -1,10 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// This class can be placed on any GameObject and provides an API for storing weapons.
+/// This component provides an API for storing weapons.
+///
+/// Assuming the following Player object structure:
+///
+///     Player
+///     ║
+///     ╠══ Model
+///     ║
+///     ╚══ WeaponHolder
+///         ║
+///         ╚══ DefaultWeapon
+///
+/// Place this class, WeaponUser, on Player as a component, then in the Editor, drag
+/// WeaponHolder into the Storage slot, and DefaultWeapon into the Weapon slot.
+///
+/// The DefaultWeapon MUST have the <see cref="Weapon"//> class as a component.
 /// </summary>
 public class WeaponUser : BetterMonoBehaviour
 {
