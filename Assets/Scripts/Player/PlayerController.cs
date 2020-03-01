@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         {
             _interactableMovingTo = null;
             LocateHit();
-            _animator.SetBool("Movement", true);
         }
  
         MoveCharacter();
@@ -140,14 +139,11 @@ public class PlayerController : MonoBehaviour
                                                   Time.deltaTime * 10);
 
             _characterController.SimpleMove(transform.forward * _speed);
-            /*if(!_inMoveTrigger)*/
-            
-            //_inMoveTrigger = true;
+            _animator.SetBool("Movement", true);
         }
         else
         {
-            /*if (_inMoveTrigger)*/ _animator.SetBool("Movement", false);
-            //_inMoveTrigger = false;
+            _animator.SetBool("Movement", false);
         }
 
         //Debug.Log("_inMoveTrigger: " + _inMoveTrigger);

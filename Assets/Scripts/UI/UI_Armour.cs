@@ -16,7 +16,7 @@ public class UI_Armour : MonoBehaviour
     {
         // Slider gets the UI Slider it's attached to
         slider = GetComponent<Slider>();
-
+        playerArmour = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         //healthImage = transform.Find("HealthFill").GetComponent<Image>();
         //healthImage.fillAmount = .3f;
     }
@@ -25,7 +25,6 @@ public class UI_Armour : MonoBehaviour
     void Update()
     {
         // fillValue gets value of health, and sets slider value to it. 
-        float fillValue = playerArmour._ap / 1;
-        slider.value = fillValue;
+        slider.value = playerArmour._ap;
     }
 }
