@@ -1269,21 +1269,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3565550628508040966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c690619f841df44b8c985581fd7ccae, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f328a8ed2d18c4499a4a29c472d1514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _range: 10000
+  _range: 0
   _equippedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   _sheathedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 41.92, y: -90, z: -11.69, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   _discardedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
 --- !u!1 &4156304848268314343 stripped
 GameObject:
@@ -1558,21 +1558,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6403396996567324636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c690619f841df44b8c985581fd7ccae, type: 3}
+  m_Script: {fileID: 11500000, guid: 94afbe5e0f004c54f844572f3c39a26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _range: 10
+  _range: 0
   _equippedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   _sheathedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   _discardedTransform:
     position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 1}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
 --- !u!4 &7964112900067698127 stripped
 Transform:
