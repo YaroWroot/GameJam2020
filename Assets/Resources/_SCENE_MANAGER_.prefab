@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovePointIndicator: {fileID: 5136277357409175919, guid: e503fa05b7126fb42a7287bf2d3707d3,
     type: 3}
+  PlayerArrowProjectile: {fileID: 1454481150606893803, guid: 034553db580b8704e8b21138b958fd3f,
+    type: 3}
+  PointsPopup: {fileID: 1213111585124137877, guid: 597c1e831d4ccff45b0f3667cc155344,
+    type: 3}
   EnemyMaterials:
   - {fileID: 2100000, guid: 1f88aa0dd78b20347b05a6158c0f85b1, type: 2}
   - {fileID: 2100000, guid: 2cce710d638b4114d89a1ae8bd266c3f, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
@@ -26,6 +27,12 @@ public class CharacterAnimation : MonoBehaviour
                 _animator.SetInteger("AIAttack", 3);
                 break;
         }
+    }
+
+    public float GetAnimationLength(string name)
+    {
+        var clips = _animator.runtimeAnimatorController.animationClips;
+        return clips.First(e => e.name == name).length;
     }
 
     public void Hit()

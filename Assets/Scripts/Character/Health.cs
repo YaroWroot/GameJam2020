@@ -29,18 +29,30 @@ public class Health : MonoBehaviour
 
     public bool TakeDamage(float damage)
     {
-        _hp -= ArmourReduction(damage);
+        var rDamage = ArmourReduction(damage);
+        _hp -= rDamage;
 
-        if(_hp <= 0)
+        PointsPopUp.Create(transform.position, (float)System.Math.Round(rDamage, 2));
+
+        if (_hp <= 0)
         {
             _characterAnimation.Death();
-            _hp = 0;
+
+            gameObject.tag = "";
+
+            StartCoroutine(DeathDestroy(_characterAnimation.GetAnimationLength("A_Gladiator_Death")));
             return true;
         }
 
         _characterAnimation.Hit();
 
         return true;
+    }
+
+    private IEnumerator DeathDestroy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
     }
 
     private float ArmourReduction(float damage)
