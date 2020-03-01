@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
-  _speed: 10
+  _speed: 1000
   _owner: Player
 --- !u!136 &6984357248005574668
 CapsuleCollider:

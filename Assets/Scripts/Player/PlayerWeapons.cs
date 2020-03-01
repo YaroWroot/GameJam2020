@@ -46,4 +46,9 @@ public class PlayerWeapons : MonoBehaviour
         yield return new WaitForSeconds(_bowCoolDown);
         _bowCoolDownCheck = false;
     }
+
+    public void AttackNormal(GameObject target)
+    {
+        target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
+    }
 }

@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
                 if (_intersectCheck.bounds.Intersects(target.transform.GetComponent<Collider>().bounds))
                 {
                     _animator.SetTrigger("Attack");
-
+                    _playerWeapons.AttackNormal(target);
                     if (_interactableMovingTo != null) _interactableMovingTo = null;
                 }
                 else
