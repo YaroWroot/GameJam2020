@@ -7,6 +7,8 @@
 
     private GameObject _player;
 
+    bool follow = true;
+
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -15,6 +17,11 @@
     // Update is called once per frame
     void Update()
     {
-        transform.position = _player.transform.position + _cameraOffset;
+        if(follow) transform.position = _player.transform.position + _cameraOffset;
+    }
+
+    public void StopFollow()
+    {
+        follow = false;
     }
 }

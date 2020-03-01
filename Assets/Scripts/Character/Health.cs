@@ -46,6 +46,19 @@ public class Health : MonoBehaviour
                 _characterAnimation.SetMovement(false);
             }
 
+            if (gameObject.tag == "Player")
+            {
+                var t = GameObject.FindGameObjectsWithTag("Enemy");
+
+                foreach (var e in t)
+                {
+                    Debug.Log(e.name);
+                    e.GetComponent<GroundMovement>().stopall = true;
+                }
+
+                Camera.main.GetComponent<CameraControlScript>().StopFollow();
+            }
+
             gameObject.tag = "Untagged";
 
             StartCoroutine(DeathDestroy(_characterAnimation.GetAnimationLength("A_Gladiator_Death")));

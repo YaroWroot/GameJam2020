@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask _ignoreClickLayer;
     public LayerMask _ignorePlayer;
     public GameObject _playerAsset;
+    public GameObject _pauseMenu;
     public CharacterController _characterController;
     public CharacterAnimation _characterAnimation;
     public Collider _intersectCheck;
@@ -31,6 +32,13 @@ public class PlayerController : MonoBehaviour
         _animator.enabled = true;
 
         _playerWeapons = GetComponentInChildren<PlayerWeapons>();
+    }
+
+    private void OnDestroy()
+    {
+        _pauseMenu.transform.GetComponentsInChildren<Transform>().First(e => e.name == "Resume").gameObject.SetActive(false);
+        
+        _pauseMenu.SetActive(true);
     }
 
     // Update is called once per frame
@@ -71,6 +79,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             _playerWeapons.FireMultipleBow(_animator);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            _pauseMenu.SetActive(true);
         }
 
         //if (Input.GetMouseButton(1))

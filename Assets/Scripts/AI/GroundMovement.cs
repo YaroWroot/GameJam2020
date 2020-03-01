@@ -13,6 +13,7 @@ public class GroundMovement : MonoBehaviour
 
     public bool attacking = false;
 
+    public bool stopall = false;
 
     public float attackDelay = 1f;
 
@@ -20,7 +21,8 @@ public class GroundMovement : MonoBehaviour
 
     private void Awake()
     {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;        
+        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        gameObject.name = "Enemy " + Random.Range(0, 9999);
     }
 
     // Start is called before the first frame update
@@ -31,31 +33,39 @@ public class GroundMovement : MonoBehaviour
 
     void Update()
     {
-        _characterAnimation.SetMovement(true);
-
-        Debug.Log("Distance to player: " + StaticFunctions.DistanceToTarget(transform.position, _target.position));
-
-        if (IsInMeleeRangeOf && !attacking)
+        if (stopall)
         {
-            Debug.Log("MeleeRange");
-            attacking = true;
-            Debug.Log("MeleeAttack");
+            _characterAnimation.Attack(3);
             _characterAnimation.SetMovement(false);
-            agent.enabled = false;
-            int rnd = Random.Range(0, 3);
-            _characterAnimation.Attack(rnd);
-            agent.enabled = true;
-            _target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
-            StartCoroutine(MeleeAttack());
-            RotateTowards(_target);
         }
-        else if(!IsInMeleeRangeOf)
+        else
         {
             _characterAnimation.SetMovement(true);
-            _characterAnimation.Attack(3);
-        }
 
-        agent.SetDestination(_target.transform.position);
+            Debug.Log("Distance to player: " + StaticFunctions.DistanceToTarget(transform.position, _target.position));
+
+            if (IsInMeleeRangeOf && !attacking)
+            {
+                Debug.Log("MeleeRange");
+                attacking = true;
+                Debug.Log("MeleeAttack");
+                _characterAnimation.SetMovement(false);
+                agent.enabled = false;
+                int rnd = Random.Range(0, 3);
+                _characterAnimation.Attack(rnd);
+                agent.enabled = true;
+                _target.GetComponent<Health>().TakeDamage(Random.Range(2, 10));
+                StartCoroutine(MeleeAttack());
+                RotateTowards(_target);
+            }
+            else if (!IsInMeleeRangeOf)
+            {
+                _characterAnimation.SetMovement(true);
+                _characterAnimation.Attack(3);
+            }
+
+            agent.SetDestination(_target.transform.position);
+        }
     }
 
     public IEnumerator MeleeAttack()

@@ -8,10 +8,10 @@ public class PlayerWeapons : MonoBehaviour
     public Transform _handBow;
     public Transform _unequippedBow;
     public Transform _sword;
-    public float _bowCoolDown = 1.0f;
+    private float _bowCoolDown = 0.5f;
     public float _bowMultiCoolDown = 5.0f;
 
-    private float _bowAnimTime = 3.0f;
+    private float _bowAnimTime = 0.1f;
     private bool _bowCoolDownCheck = false;
     private bool _bowMultiCoolDownCheck = false;
     private int _multiCount = 0;
@@ -51,7 +51,7 @@ public class PlayerWeapons : MonoBehaviour
             _sword.gameObject.SetActive(false);
             animator.SetTrigger("BowShoot");
             StartCoroutine(SwapBowBack());
-            StartCoroutine(ShootArrow());
+            ShootArrow();
             //EventManager.TriggerEvent("BowCoolDown");
             StartCoroutine(BowCoolDown());
         }
@@ -86,9 +86,8 @@ public class PlayerWeapons : MonoBehaviour
         _handBow.gameObject.SetActive(false);
     }
 
-    private IEnumerator ShootArrow()
+    private void ShootArrow()
     {
-        yield return new WaitForSeconds((_bowAnimTime / 2));
         var arrow = Instantiate(GameAssets.i.PlayerArrowProjectile, transform.position + transform.forward, transform.rotation);
         arrow.GetComponent<Rigidbody>().AddForce(transform.forward * arrow.GetComponent<Projectile>()._speed);
     }
